@@ -1,0 +1,11 @@
+#compiled object files
+*.exe
+*.o
+*.out
+
+#vs code specific files 
+.vscode/
+
+
+#system files
+Thumbs.db
