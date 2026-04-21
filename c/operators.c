@@ -11,7 +11,7 @@ int main()
     div = b/a;
     mod =a%b;
 
-    //augmented assignment operator
+    //augmented assignment operators
     z+=2;
     x-=2;
     y*=5;
