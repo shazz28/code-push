@@ -15,7 +15,8 @@
 
     }
     res= val[0]*(val[1]+val[2])*val[3]-val[4];
-
+    
+    printf("\nResult: %.2f * (%.2f + %.2f) * %.2f - %.2f = %.2f \n",val[0],val[1],val[2],val[3],val[4],res);
     printf("the result is %.2f\n",res);
     
  }
