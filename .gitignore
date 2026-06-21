@@ -1,11 +1,21 @@
-#compiled object files
+# compiled object files
 *.exe
 *.o
 *.out
 
-#vs code specific files 
+# vs code specific files
 .vscode/
 
+# Ignore specific folders
+Data/
+Uploads/
+hithash/
+Enter/
 
-#system files
+# Ignore specific files
+installer_config.xml
+my.ini
+zeusDB.session.sql
+
+# system files
 Thumbs.db
