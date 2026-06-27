@@ -57,7 +57,7 @@ use college;
 create table student(
     rollno int PRIMARY KEY,
     name VARCHAR(50),
-    marks int NOT NULL
+    marks int NOT NULL,
     grade varchar(1),
     city varchar(20)
 );
@@ -69,3 +69,5 @@ insert into student VALUES
 (104,"dhruv",96,"A","Banglore"),
 (105,"emanuel",12,"D","Delhi"),
 (106,"farah",82,"B","Delhi");
+
+select * from student;
