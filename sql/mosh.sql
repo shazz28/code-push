@@ -253,7 +253,20 @@ select
 from order_items oi
 join order_item_notes oin
     on oi.order_id = oin.order_id
-    and oi.product_id = oin.product_id
+    and oi.product_id = oin.product_id; 
+/*  we add and operators for compund join to make sure that both the crieteria matches,
+we also can add or operator but it is not recommended becuse it will delay the results and breaks the optimization 
+because it checks the condition row by row and for huge database it will be hectic
+example:
+SELECT 
+    u.name, 
+    m.message_text
+FROM users u
+JOIN messages m 
+    ON u.user_id = m.sender_id 
+    OR u.user_id = m.receiver_id;
 
+-- updated product id because of id mis-match no o/p was returened
 update order_item_notes set product_id = 4 where note_id =1;
-select * from order_item_notes
+select * from order_item_notes;
+*/
