@@ -160,7 +160,7 @@ from orders o
 join customers c 
     on o.customer_id = c.customer_id 
     order by order_id 
-
+ 
 /* 
 the key word inner for inner join is optional 
 
@@ -206,6 +206,29 @@ select
         join employees m /* should use different aliases */
             on e.reports_to = m.employee_id
 ;
+/*--joining multiple tables for employee and offices*/ 
+SELECT
+    e.employee_id,/*should prefix the columns to be displayed*/
+    e.first_name,
+    o.city as office_location 
+from employees e
+join offices o
+    on o.office_id = e.office_id;
+
+desc employees
+--inner join and outer join 
+
+select 
+    e.employee_id as "Emp Id",/*should prefix the columns to be displayed*/
+    concat(e.first_name,'' ,e.last_name) as "Name",
+    m.first_name as Manager,
+    o.city as "Ofice Location"
+from employees e 
+join employees m /* should use different aliases */
+            on e.reports_to = m.employee_id
+join offices o
+    on o.office_id = e.office_id
+order by e.first_name, e.employee_id;
 
 -- joining multiple tables 
 use sql_store;
@@ -242,7 +265,7 @@ join payment_methods pm
     on p.payment_method = pm.payment_method_id;
 
 --compound join
-
+use sql_store;
 DESCRIBE order_items;
 
 select 
@@ -254,6 +277,8 @@ from order_items oi
 join order_item_notes oin
     on oi.order_id = oin.order_id
     and oi.product_id = oin.product_id; 
+
+
 /*  we add and operators for compund join to make sure that both the crieteria matches,
 we also can add or operator but it is not recommended becuse it will delay the results and breaks the optimization 
 because it checks the condition row by row and for huge database it will be hectic
@@ -270,3 +295,75 @@ JOIN messages m
 update order_item_notes set product_id = 4 where note_id =1;
 select * from order_item_notes;
 */
+
+--implicit join syntax
+
+select * 
+from orders o, customers c 
+where o.customer_id = c.customer_id;
+
+--outer joins
+
+--left join
+
+select 
+    c.customer_id,
+    c.first_name, 
+    o.order_id
+from customers c
+left join orders o
+    on c.customer_id = o.customer_id
+order by c.customer_id
+
+/*
+left outer join which is customers table,
+this query displays the details of the customers 
+irrespective of whether they have orders or not 
+if they don't have any orders it will be displayed as
+null*/
+
+--right join
+
+select 
+    c.customer_id,
+    c.first_name, 
+    o.order_id
+from orders o
+right join customers c
+    on c.customer_id = o.customer_id
+order by c.customer_id
+/*
+right outer join which is customers table,
+this query displays the details of the customers 
+irrespective of whether they have orders or not 
+if they don't have any orders it will be displayed as
+null*/
+
+--activity 
+
+select 
+    p.product_id,
+    p.name,
+    o.quantity
+from products p
+left join order_items o
+    on p.product_id = o.product_id
+order by p.product_id
+
+-- outer join between multiple tables
+
+select 
+    c.customer_id,
+    c.first_name, 
+    o.order_id,
+    sh.name
+from customers c
+left join orders o
+    on c.customer_id = o.customer_id
+left join shippers sh
+    on o.shipper_id = sh.shipper_id
+order by c.customer_id
+
+/*we are using left outer join btwn multiple table so 
+that it is easy to visualize the data from which table 
+we are joining*/
